@@ -5,9 +5,22 @@ Feature: Search for the product
 ### Prepare Positive and negative scenarios
 
   Scenario:
-#    When he calls endpoint "https://waarkoop-server.herokuapp.com/api/v1/search/demo/orange"
-#    Then he sees the results displayed for apple
-#    When he calls endpoint "https://waarkoop-server.herokuapp.com/api/v1/search/demo/apple"
-#    Then he sees the results displayed for mango
-    When he calls endpoint "https://waarkoop-server.herokuapp.com/api/v1/search/demo/car"
-    Then he doesn not see the results
+    When he calls endpoint "https://waarkoop-server.herokuapp.com/api/v1/search/demo/apple"
+    Then he sees the request succeed
+    Then the response contains 0 items
+
+  Scenario:
+    When he calls endpoint "https://waarkoop-server.herokuapp.com/api/v1/search/demo/mango"
+    Then he sees the request not found for the specified item
+    Then he sees the error with message "Not found" for the item "mango"
+
+  Scenario:
+    When he calls endpoint "https://waarkoop-server.herokuapp.com/api/v1/search/demo/pasta"
+    Then he sees the request succeed
+    Then the response contains 20 items
+
+  Scenario:
+    When he calls endpoint "https://waarkoop-server.herokuapp.com/api/v1/search/demo/cola"
+    Then he sees the request succeed
+    Then the response contains 20 items
+
