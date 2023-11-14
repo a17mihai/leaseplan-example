@@ -1,0 +1,17 @@
+stages:
+  - test
+
+variables:
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version"
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y maven
+
+test:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS clean verify
+  artifacts:
+    paths:
+      - target/site/serenity/
